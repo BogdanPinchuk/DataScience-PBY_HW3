@@ -132,7 +132,6 @@ class TestPrintOddNums(TestCase):
             print_odd_numbers(start, stop)
 
         actual = buffer.getvalue().strip()
-        print(actual)
         expected_root = "1, 3, 5, 7, 9, 11, 13, 15, 17, 19"
         expected = f"{expected_root}, \b\b"
         self.assertEqual(expected, actual)
@@ -163,9 +162,7 @@ class TestPrintRectBySign(TestCase):
             print_rect_by_sign(n_rows, m_cols, sign, left_margin)
 
         actual = buffer.getvalue().rstrip()
-        print(actual)
         expected = "\t*************************\n\t*************************\n\t*************************\n\t*************************\n\t*************************"
-        print(expected)
         self.assertEqual(expected, actual)
 
     def test_print_rect_by_sign_incorrect_input_n(self):
@@ -188,4 +185,22 @@ class TestPrintRectBySign(TestCase):
             print_rect_by_sign(n_rows, m_cols)
 
         expected = 'Incorrect input data!'
+        self.assertEqual(expected, str(context.exception))
+
+
+class TestCountPos(TestCase):
+    def test_count_positive(self):
+        numbers = [i for i in range(-10, 11)]
+        actual = count_positive(numbers)
+        expected = 10
+        self.assertEqual(expected, actual)
+
+    def test_count_positive_empty_array(self):
+        numbers = []
+
+        # wait the exception
+        with self.assertRaises(ValueError) as context:
+            _ = count_positive(numbers)
+
+        expected = 'Input array is empty!'
         self.assertEqual(expected, str(context.exception))

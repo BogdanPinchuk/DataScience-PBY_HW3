@@ -84,3 +84,19 @@ def print_rect_by_sign(num_rows, num_cols, sign='#', left_margin=""):
             for col in range(num_cols):
                 print(sign, end="")
             print()
+
+
+def count_positive(numbers):
+    """
+    Calculate the count of the positive numbers in a list of numbers.
+    :param numbers: list of numbers
+    :return: count of positive numbers
+    """
+    if numbers == [] or len(numbers) == 0:
+        raise ValueError("Input array is empty!")
+    else:
+        count = 0
+        for number in numbers:
+            if number > 0:
+                count += 1
+        return count
