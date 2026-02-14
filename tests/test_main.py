@@ -242,3 +242,35 @@ class TestMaxInList(TestCase):
         actual = max_in_list(numbers)
         expected = None
         self.assertEqual(expected, actual)
+
+
+class TestFuncF(TestCase):
+    def test_f(self):
+        value = 24
+        actual = f(value)
+        expected = 0.2
+        self.assertEqual(expected, actual)
+
+    def test_f_zero_error(self):
+        value = -1
+
+        # intercept data output
+        buffer = io.StringIO()
+        with redirect_stdout(buffer):
+            f(value)
+
+        actual = buffer.getvalue().strip()
+        expected = 'Значення "-1" призводить до ділення на нуль!'
+        self.assertEqual(expected, actual)
+
+    def test_f_complex_error(self):
+        value = -3
+
+        # intercept data output
+        buffer = io.StringIO()
+        with redirect_stdout(buffer):
+            f(value)
+
+        actual = buffer.getvalue().strip()
+        expected = 'Значення "-3" призводить до комплексного результату!'
+        self.assertEqual(expected, actual)

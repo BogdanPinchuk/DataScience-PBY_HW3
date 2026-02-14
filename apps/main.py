@@ -1,3 +1,6 @@
+from math import sqrt
+
+
 def print_numbers_by_range(start, stop, step=1, is_row=True):
     """
     Prints numbers between start and stop (inclusive) with step
@@ -115,6 +118,7 @@ def number_type(n):
     else:
         return "zero"
 
+
 def max_in_list(numbers):
     """
     Return the maximum number in a list of numbers.
@@ -129,3 +133,18 @@ def max_in_list(numbers):
             if numbers[index] > max_number:
                 max_number = numbers[index]
         return max_number
+
+
+def f(x):
+    """
+    Calculate the f(x) = sqrt(1/(1+x)) function.
+    :param x: input value, requirement: x > -1
+    :return: result of f(x)
+    """
+    try:
+        result = sqrt(1.0 / (1 + x))
+        return result
+    except ZeroDivisionError:
+        print(f"Значення \"{x}\" призводить до ділення на нуль!")
+    except ValueError:
+        print(f"Значення \"{x}\" призводить до комплексного результату!")
