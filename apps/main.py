@@ -114,3 +114,18 @@ def number_type(n):
         return "positive"
     else:
         return "zero"
+
+def max_in_list(numbers):
+    """
+    Return the maximum number in a list of numbers.
+    :param numbers: list of numbers
+    :return: maximum number
+    """
+    if numbers == [] or len(numbers) == 0:
+        return None
+    else:
+        max_number = numbers[0]
+        for index in range(1, len(numbers)):
+            if numbers[index] > max_number:
+                max_number = numbers[index]
+        return max_number

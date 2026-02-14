@@ -1,5 +1,6 @@
 import unittest
 import io
+import random as rnd
 
 from unittest import TestCase
 from unittest.mock import patch
@@ -223,4 +224,21 @@ class TestNumberType(TestCase):
         numbers = 0
         actual = number_type(numbers)
         expected = 'zero'
+        self.assertEqual(expected, actual)
+
+
+class TestMaxInList(TestCase):
+    def test_max_in_list(self):
+        lower = -100
+        upper = 100
+        count_nums = 10
+        numbers = [rnd.randrange(lower, upper + 1) for _ in range(count_nums)]
+        actual = max_in_list(numbers)
+        expected = max(numbers)
+        self.assertEqual(expected, actual)
+
+    def test_max_in_list_empty_array(self):
+        numbers = []
+        actual = max_in_list(numbers)
+        expected = None
         self.assertEqual(expected, actual)
