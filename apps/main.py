@@ -100,3 +100,17 @@ def count_positive(numbers):
             if number > 0:
                 count += 1
         return count
+
+
+def number_type(n):
+    """
+    Return the type of number.
+    :param n: number
+    :return: type of number
+    """
+    if n < 0:
+        return "negative"
+    elif n > 0:
+        return "positive"
+    else:
+        return "zero"

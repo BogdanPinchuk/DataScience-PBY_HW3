@@ -204,3 +204,23 @@ class TestCountPos(TestCase):
 
         expected = 'Input array is empty!'
         self.assertEqual(expected, str(context.exception))
+
+
+class TestNumberType(TestCase):
+    def test_number_type_pos(self):
+        numbers = 1
+        actual = number_type(numbers)
+        expected = 'positive'
+        self.assertEqual(expected, actual)
+
+    def test_number_type_neg(self):
+        numbers = -1
+        actual = number_type(numbers)
+        expected = 'negative'
+        self.assertEqual(expected, actual)
+
+    def test_number_type_zero(self):
+        numbers = 0
+        actual = number_type(numbers)
+        expected = 'zero'
+        self.assertEqual(expected, actual)
