@@ -52,17 +52,35 @@ def find_divisor(number):
 
 
 def print_odd_numbers(start, stop):
-   """
-   Print odd numbers from the range, the stop number included
-   :param start: The starting number
-   :param stop: The ending number (inclusive)
-   """
-   if start > stop:
-       raise ValueError("Incorrect input data for range!")
-   else:
-       for number in range(start, stop + 1):
-           if number % 2 == 0:  # only for even
-               continue
-           else:
-               print(number, end=", ")
-       print("\b\b", end="")
+    """
+    Print odd numbers from the range, the stop number included
+    :param start: The starting number
+    :param stop: The ending number (inclusive)
+    """
+    if start > stop:
+        raise ValueError("Incorrect input data for range!")
+    else:
+        for number in range(start, stop + 1):
+            if number % 2 == 0:  # only for even
+                continue
+            else:
+                print(number, end=", ")
+        print("\b\b", end="")
+
+
+def print_rect_by_sign(num_rows, num_cols, sign='#', left_margin=""):
+    """
+    Prints a rectangle with given rows and columns by sign
+    :param num_rows: The number of rows
+    :param num_cols: The number of columns
+    :param sign: The sign for printing
+    :param left_margin: The left margin for printing
+    """
+    if num_rows < 1 or num_cols < 1:
+        raise ValueError("Incorrect input data!")
+    else:
+        for row in range(num_rows):
+            print(left_margin, end="")
+            for col in range(num_cols):
+                print(sign, end="")
+            print()

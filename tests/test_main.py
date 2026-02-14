@@ -133,7 +133,7 @@ class TestPrintOddNums(TestCase):
 
         actual = buffer.getvalue().strip()
         print(actual)
-        expected_root="1, 3, 5, 7, 9, 11, 13, 15, 17, 19"
+        expected_root = "1, 3, 5, 7, 9, 11, 13, 15, 17, 19"
         expected = f"{expected_root}, \b\b"
         self.assertEqual(expected, actual)
         self.assertTrue(expected_root in actual)
@@ -147,4 +147,45 @@ class TestPrintOddNums(TestCase):
             print_odd_numbers(start, stop)
 
         expected = 'Incorrect input data for range!'
+        self.assertEqual(expected, str(context.exception))
+
+
+class TestPrintRectBySign(TestCase):
+    def test_print_rect_by_sign(self):
+        n_rows = 5
+        m_cols = 25
+        sign = '*'
+        left_margin = "\t"
+
+        # intercept data output
+        buffer = io.StringIO()
+        with redirect_stdout(buffer):
+            print_rect_by_sign(n_rows, m_cols, sign, left_margin)
+
+        actual = buffer.getvalue().rstrip()
+        print(actual)
+        expected = "\t*************************\n\t*************************\n\t*************************\n\t*************************\n\t*************************"
+        print(expected)
+        self.assertEqual(expected, actual)
+
+    def test_print_rect_by_sign_incorrect_input_n(self):
+        n_rows = 0
+        m_cols = 25
+
+        # wait the exception
+        with self.assertRaises(ValueError) as context:
+            print_rect_by_sign(n_rows, m_cols)
+
+        expected = 'Incorrect input data!'
+        self.assertEqual(expected, str(context.exception))
+
+    def test_print_rect_by_sign_incorrect_input_m(self):
+        n_rows = 5
+        m_cols = 0
+
+        # wait the exception
+        with self.assertRaises(ValueError) as context:
+            print_rect_by_sign(n_rows, m_cols)
+
+        expected = 'Incorrect input data!'
         self.assertEqual(expected, str(context.exception))
