@@ -257,7 +257,7 @@ class TestFuncF(TestCase):
         # intercept data output
         buffer = io.StringIO()
         with redirect_stdout(buffer):
-            f(value)
+            _ = f(value)
 
         actual = buffer.getvalue().strip()
         expected = 'Значення "-1" призводить до ділення на нуль!'
@@ -269,8 +269,39 @@ class TestFuncF(TestCase):
         # intercept data output
         buffer = io.StringIO()
         with redirect_stdout(buffer):
-            f(value)
+            _ = f(value)
 
         actual = buffer.getvalue().strip()
         expected = 'Значення "-3" призводить до комплексного результату!'
         self.assertEqual(expected, actual)
+
+
+class TestAnalyzeEvenInNumList(TestCase):
+    def test_analyze_even_in_num_list(self):
+        numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+        actual_list, actual_report = analyze_even_in_num_list(numbers)
+        expected_report = """Number | Is even 
+----------------
+1      | False    
+2      | True     
+3      | False    
+4      | True     
+5      | False    
+6      | True     
+7      | False    
+8      | True     
+----------------
+Список тільки парних чисел: [2, 4, 6, 8]"""
+        expected_list = [2, 4, 6, 8]
+        self.assertEqual(expected_list, actual_list)
+        self.assertEqual(expected_report, actual_report)
+
+    def test_analyze_even_in_num_list_empty_array(self):
+        numbers = []
+
+        # wait the exception
+        with self.assertRaises(ValueError) as context:
+            _ = analyze_even_in_num_list(numbers)
+
+        expected = 'Input array is empty!'
+        self.assertEqual(expected, str(context.exception))

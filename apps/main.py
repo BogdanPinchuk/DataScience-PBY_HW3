@@ -148,3 +148,37 @@ def f(x):
         print(f"Значення \"{x}\" призводить до ділення на нуль!")
     except ValueError:
         print(f"Значення \"{x}\" призводить до комплексного результату!")
+
+
+def analyze_even_in_num_list(numbers):
+    """
+    Analyze the evenness of each number in a list.
+    :param numbers: list of numbers
+    :return: report (number | is even)
+    """
+    if numbers == [] or len(numbers) == 0:
+        raise ValueError("Input array is empty!")
+    else:
+        is_even = lambda x: x % 2 == 0
+        input_list = [is_even(number) for number in numbers]
+        dictionary = dict(zip(numbers, input_list))
+
+        srt_col1 = 'Number'
+        srt_col2 = ' Is even'
+        max_len_lf = len(srt_col1)
+        max_len_rt = len(srt_col2)
+
+        for key, value in dictionary.items():
+            max_len_lf = max(max_len_lf, len(f"{key}"))
+            max_len_rt = max(max_len_rt, len(f"{value}"))
+
+        result = f"{f"{srt_col1}":<{max_len_lf + 1}}|{f"{srt_col2}":^{max_len_rt + 1}}"
+        result += f"\n{'-':-^{max_len_lf + max_len_rt + 2}}"
+        for key, value in dictionary.items():
+            result += f"\n{key:<{max_len_lf + 1}}| {f"{value}":<{max_len_rt + 1}}"
+        result += f"\n{'-':-^{max_len_lf + max_len_rt + 2}}"
+
+        output_list = [key for key, value in dictionary.items() if value]
+        result += f"\nСписок тільки парних чисел: {output_list}"
+
+        return output_list, result
